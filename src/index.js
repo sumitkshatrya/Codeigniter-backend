@@ -1,3 +1,4 @@
+// src/index.js
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
@@ -13,6 +14,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:5173",
+      "https://codeigniter-frontend.vercel.app",
       "https://codeigniter-frontend-git-main-sumit-kumars-projects-e897095f.vercel.app"
     ],
     credentials: true,
@@ -20,6 +22,11 @@ app.use(
 );
 
 app.use(express.json());
+
+// ✅ Root route for testing
+app.get("/", (req, res) => {
+  res.send("✅ Backend is running!");
+});
 
 const PORT = process.env.PORT || 5000;
 
