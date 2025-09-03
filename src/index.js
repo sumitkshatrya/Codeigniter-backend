@@ -13,7 +13,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:5173",
-      "https://codeigniter-frontend.vercel.app"
+      "https://codeigniter-frontend-git-main-sumit-kumars-projects-e897095f.vercel.app"
     ],
     credentials: true,
   })
