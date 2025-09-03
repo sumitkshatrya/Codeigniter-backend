@@ -1,22 +1,32 @@
-import express from "express"
-import dotenv from "dotenv"
-import cors from "cors"
+import express from "express";
+import dotenv from "dotenv";
+import cors from "cors";
 import { connectDB } from "./lib/db.js";
 import authRoutes from "./routes/auth.js";
 import listRoutes from "./routes/lists.js";
 
-dotenv.config()
+dotenv.config();
 const app = express();
 
-app.use(cors({ origin: "http://localhost:5173" }));
+// ✅ Allow localhost + Vercel frontend
+app.use(
+  cors({
+    origin: [
+      "http://localhost:5173",
+      "https://codeigniter-frontend.vercel.app"
+    ],
+    credentials: true,
+  })
+);
+
 app.use(express.json());
 
-const PORT = process.env.PORT
+const PORT = process.env.PORT || 5000;
 
 app.use("/api/auth", authRoutes);
 app.use("/api", listRoutes);
 
 app.listen(PORT, () => {
-    console.log("server is running on  PORT:"+PORT)
-    connectDB(); 
-})
+  console.log("✅ Server is running on PORT: " + PORT);
+  connectDB();
+});
